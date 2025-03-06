@@ -1,0 +1,23 @@
+from fastapi import FastAPI, UploadFile, File, Response
+import re
+ 
+def add_alt_to_img_tags(html_content: str) -> str:
+    # Regex pour détecter les balises <img> avec src mais sans alt="image"
+    img_pattern = re.compile(r'(<img\s+[^>]*?src="[^"]+")(?!\s+alt="image")', re.IGNORECASE)
+    count = 0  # Compteur d'ajouts
+    # Fonction pour ajouter alt="image" immédiatement après src
+    def add_alt(match):
+        nonlocal count
+        count += 1
+        return f'{match.group(1)} alt="image"'
+    # Remplacement
+    updated_content = img_pattern.sub(add_alt, html_content)
+    print(f'Nombre de balises alt ajoutées : {count}')
+    return updated_content
+ 
+@app.post("/add_alt_to_img_tags")
+async def add_alt_to_img_tags_endpoint(file: UploadFile = File(...)):
+    content = await file.read()
+    html_content = content.decode("utf-8")
+    updated_content = add_alt_to_img_tags(html_content)
+    return Response(content=updated_content, media_type=file.content_type)
