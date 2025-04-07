@@ -119,52 +119,52 @@ def combine_files(file_one, file_two, file_three):
         f.write(str(soup_two))
 
 #for two files this is what we need 
-# def combine_files(file_one, file_two):
-#     input_files = [file_one, file_two]  # Adjusting for two files
-#     style_dict, body_dict = extract_content(input_files)
+def combine_filestwo(file_one, file_two):
+    input_files = [file_one, file_two]  # Adjusting for two files
+    style_dict, body_dict = extract_content(input_files)
 
-#     result = chk_cls(style_dict, input_files)
+    result = chk_cls(style_dict, input_files)
 
-#     if result is not None:
-#         i, j = result
-#         rename_batch_classes_in_file(input_files[i], f"modified_batch_{i}.html")
-#         rename_a_classes_in_file(input_files[i], f"modified_A_{i}.html")
+    if result is not None:
+        i, j = result
+        rename_batch_classes_in_file(input_files[i], f"modified_batch_{i}.html")
+        rename_a_classes_in_file(input_files[i], f"modified_A_{i}.html")
         
-#         updated_file = f"modified_batch_{i}.html"
-#         input_files[i] = updated_file
-#         style_dict, body_dict = extract_content(input_files)
+        updated_file = f"modified_batch_{i}.html"
+        input_files[i] = updated_file
+        style_dict, body_dict = extract_content(input_files)
 
-#     styles = '\n'.join([style_dict[Path(path).stem] for path in input_files])
-#     body_content = ''.join([body_dict[Path(path).stem] for path in input_files])
+    styles = '\n'.join([style_dict[Path(path).stem] for path in input_files])
+    body_content = ''.join([body_dict[Path(path).stem] for path in input_files])
 
-#     path_two = Path(file_two)
-#     with open(path_two, 'r', encoding='utf-8') as f:
-#         content_two = f.read()
+    path_two = Path(file_two)
+    with open(path_two, 'r', encoding='utf-8') as f:
+        content_two = f.read()
 
-#     soup_two = BeautifulSoup(content_two, 'lxml')
+    soup_two = BeautifulSoup(content_two, 'lxml')
 
-#     if soup_two.head:
-#         style_tag = soup_two.head.find('style')
-#         if style_tag:
-#             style_tag.string = styles
-#         else:
-#             new_style_tag = soup_two.new_tag('style')
-#             new_style_tag.string = styles
-#             soup_two.head.append(new_style_tag)
+    if soup_two.head:
+        style_tag = soup_two.head.find('style')
+        if style_tag:
+            style_tag.string = styles
+        else:
+            new_style_tag = soup_two.new_tag('style')
+            new_style_tag.string = styles
+            soup_two.head.append(new_style_tag)
     
-#     if soup_two.body:
-#         soup_two.body.clear()
-#         soup_two.body.append(BeautifulSoup(body_content, 'lxml'))
+    if soup_two.body:
+        soup_two.body.clear()
+        soup_two.body.append(BeautifulSoup(body_content, 'lxml'))
 
-#     output_file = path_two.parent / "merged_output.xhtml"
-#     with open(output_file, 'w', encoding='utf-8') as f:
-#         f.write(str(soup_two))
-
-# file_one = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\PARTIE 1.xhtml"
-# file_two = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\idi-2024-12-31-fr.xhtml"
-# combine_files(file_one, file_two)
+    output_file = path_two.parent / "merged_output.xhtml"
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(str(soup_two))
 
 file_one = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\PARTIE 1.xhtml"
-file_two = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\idi-2024-12-31-fr.xhtml"
+file_two = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\87_114.xhtml"
+#combine_filestwo(file_one, file_two)
+
+file_one = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\PARTIE 1.xhtml"
+file_two = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\87_114.xhtml"
 file_three = r"C:\Users\norel_2b285at\Downloads\IDI 5 AVRIL 2025 A FUSIONNER\IDI 5 AVRIL 2025 A FUSIONNER\PARTIE 3.xhtml"
 combine_files(file_one, file_two, file_three)
